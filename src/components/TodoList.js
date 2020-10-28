@@ -13,7 +13,8 @@ class TodoList extends Component {
     render() {
         return (
             <TodoFormUI
-             inputValue = {this.state.inputValue}/>
+             inputValue = {this.state.inputValue}
+             changeInputValue = {this.changeInputValue}/>
         );
     }
 

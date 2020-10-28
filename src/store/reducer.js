@@ -6,7 +6,7 @@ const defaultState = {
     list:[]
 }
 
-export default(state = defaultStatus, action) => {
+export default(state = defaultState, action) => {
     switch (action.type){
         case CHANGE_INPUT:
             let newState = JSON.parse(JSON.stringify(state))

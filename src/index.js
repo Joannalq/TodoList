@@ -1,11 +1,13 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoList from './functions/submitForm/TodoList';
+import TodoList from './submitForm/TodoList';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TodoFormUI/>
+    <TodoList />
   </React.StrictMode>,
   document.getElementById('root')
 );
+
 
 

@@ -6,7 +6,7 @@ const defaultState = {
     list:[]
 }
 
-export default(state = defaultState, action) => {
+function reducer (state = defaultState, action)  {
     switch (action.type){
         case CHANGE_INPUT:
             let newState = JSON.parse(JSON.stringify(state))
@@ -16,3 +16,5 @@ export default(state = defaultState, action) => {
             return state
     }
 }
+
+export default reducer

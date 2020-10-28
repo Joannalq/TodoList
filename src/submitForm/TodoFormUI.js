@@ -3,7 +3,7 @@ import React from 'react';
 const TodoFormUI = (props) =>{
     return (
         <div>
-        <form id='todoForm'>
+        <form>
             <label>
                 Description:
                 <input type="text" value={props.inputValue} onChange={props.changeInputValue}/>

@@ -19,7 +19,7 @@ const TodoFormUI = (props) =>{
             </label><br/>
             <label>
                 Content:
-                <input type="text" value={props.inputValue} onChange={props.changeInputValue}/>
+                <textarea value={props.inputValue} onChange={props.changeInputValue}/>
             </label>
         </form>
         <button type="submit" form="todoForm" value="Submit" onClick={props.submitForm}>Submit</button>

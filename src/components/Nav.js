@@ -1,22 +1,46 @@
 
-import React, { Component } from 'react';
-import {AppBar, Tabs,Tab } from '@material-ui/core'
-const Nav = () =>{
+import React from 'react';
+import {AppBar, Toolbar, ListItem, ListItemText, List, makeStyles } from '@material-ui/core'
+
+const navLinks = [
+    {title:'TODO', path:'/todo'},
+    {title:'ABOUT', path:'/about'},
+]
+
+const useStyles = makeStyles({
+    navDisplayFlex: {
+        display: 'flex',
+        justifyContent:'space-between'
+    },
+    linkText: {
+        textDecoration: 'none',
+        textTransform: 'uppercase',
+        color: 'white'
+    }
+})
+
+const Navbar = () =>{
+    const classes = useStyles();
     const [value, setValue] = React.useState('1');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
     return(
-        <div>
             <AppBar position="static" style={{ background: '#81c7e9' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" textColor='second'> 
-                <Tab label="todo"  />
-                <Tab label="about" />
-                </Tabs>
+                <Toolbar>
+                        <List Component='nav' aria-labelledby="main navigation" className={classes.navDisplayFlex}>
+                            {navLinks.map(({title, path}) => (
+                                <a href={path} key={title} className={classes.linkText}>
+                                    <ListItem button>
+                                        <ListItemText primary={title} />
+                                    </ListItem>
+                                </a>
+                            ))}
+                        </List>
+                </Toolbar>
             </AppBar>
-        </div>
     )
 }
 
-export default Nav
+export default Navbar

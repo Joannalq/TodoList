@@ -1,28 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoList from './components/TodoList';
-import Nav from './components/Nav'
-import Display from './components/Display'
-import { Grid } from '@material-ui/core';
+import TodoApp from './TodoApp';
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 
 ReactDOM.render(
-  <React.StrictMode>
-
-
-      <Grid container spacing={3} direction='row' align='center' >
-        <Grid item xs={12}>
-          <Nav />
-        </Grid>
-        <Grid item xs={5}>
-          <TodoList />
-        </Grid>
-        <Grid item xs={7}>
-          <Display/>
-        </Grid>
-      </Grid>
-  </React.StrictMode>,
+  <Provider store={store}>
+      <TodoApp />
+  </Provider>,
   document.getElementById('root')
 );
-
-
 

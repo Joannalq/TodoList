@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -21,19 +22,19 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Button from '@material-ui/core/Button';
+import { addTodo } from "../redux/actions";
+
 
 function createData(description, category, operate) {
   return { description, category, operate };
 }
 
 const rows = [
-  createData('Cupcake', 305, 'Delete'),
-  createData('Donut', 452,'Delete'),
-  createData('Eclair', 262, 'Delete'),
-  createData('Frozen yoghurt', 159,'Delete'),
-  createData('Gingerbread', 356,'Delete'),
-  createData('Honeycomb', 408, 'Delete'),
+  createData('Donut', '452','Delete'),
+  createData('Eclair', '262', 'Delete'),
+  createData('Frozen yoghurt', '159','Delete'),
 ];
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -63,8 +64,8 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'description', numeric: false, disablePadding: true, label: 'Description' },
-  { id: 'category', numeric: true, disablePadding: false, label: 'Category' },
-  { id: 'operate', numeric: true, disablePadding: false, label: 'Operate' },
+  { id: 'category', numeric: false, disablePadding: false, label: 'Category' },
+  { id: 'operate', numeric: false, disablePadding: false, label: 'Operate' },
 ];
 
 // table title
@@ -160,7 +161,6 @@ const EnhancedTableToolbar = (props) => {
             <Button size='small' variant="contained" style={{background:'#4285f4'}}>
                 Delete selected
             </Button>
-           
         </Typography>
       )}
 
@@ -209,7 +209,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Display() {
+function Display() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -226,19 +226,19 @@ export default function Display() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = rows.map((n) => n.description);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, description) => {
+    const selectedIndex = selected.indexOf(description);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, description);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -266,7 +266,7 @@ export default function Display() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (description) => selected.indexOf(description) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -280,6 +280,7 @@ export default function Display() {
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
             aria-label="enhanced table"
+            style={{width:120}}
           >
             <EnhancedTableHead
               classes={classes}
@@ -316,8 +317,8 @@ export default function Display() {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.description}
                       </TableCell>
-                      <TableCell align="right">{row.category}</TableCell>
-                      <TableCell align="right">{row.operate}</TableCell>
+                      <TableCell align="center" >{row.category}</TableCell>
+                      <TableCell align="center">{row.operate}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -346,3 +347,12 @@ export default function Display() {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  // console.log(state)
+  return state.todos
+}
+
+export default connect(
+  mapStateToProps,
+  {addTodo}
+)(Display);

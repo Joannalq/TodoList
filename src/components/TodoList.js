@@ -1,27 +1,19 @@
+import React from "react";
+import { connect } from "react-redux";
+import Todo from "./Todo";
+import { addTodo } from "../redux/actions";
 
-import React, { Component } from 'react';
-import TodoFormUI from './TodoFormUI'
-import store from '../store/index'
-import {changeInputAction} from '../store/actionCreators'
+const TodoList = ({todos}) => (
+    <table className="todo-list">
+        {todos && todos.length ?
+        todos.map((todo, index)=>{return <Todo key={`todo-${todo.id}`} todo={todo}/>})
+        :'nothing to show'}
+    </table>
+)
 
-class TodoList extends Component {
-    constructor(props){
-        super(props)
-        this.state = store.getState()
-        this.changeInputValue = this.changeInputValue.bind(this)
-    }
-    render() {
-        return (
-            <TodoFormUI
-             inputValue = {this.state.inputValue}
-             changeInputValue = {this.changeInputValue}/>
-        );
-    }
-
-    changeInputValue(e){
-        const action = changeInputAction(e.target.value)
-        store.dispatch(action)
-    }
+const mapStateToProps = state => {
+    console.log(state)
+    return {todos:[]}
 }
 
-export default TodoList;
+export default connect(mapStateToProps,{addTodo})(TodoList)

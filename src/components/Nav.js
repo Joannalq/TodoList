@@ -3,7 +3,7 @@ import React from 'react';
 import {AppBar, Toolbar, ListItem, ListItemText, List, makeStyles } from '@material-ui/core'
 
 const navLinks = [
-    {title:'TODO', path:'/todo'},
+    {title:'TODO', path:'/'},
     {title:'ABOUT', path:'/about'},
 ]
 

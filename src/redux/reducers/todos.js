@@ -1,22 +1,25 @@
-import {ADD_TODO} from '../actionType'
+import {ADD_TODO,DELETE_TODO} from '../actionType'
 
 const initialState = {
-    form:{
-        description:'test',
-        category: 10,
-        content:'test'
-    }
+    items:[]
 }
 
+
 export default function(state=initialState, action) {
+    console.log(action.payload)
     switch (action.type) {
         case ADD_TODO:{
-            return{
-                ...state,
-                form: action.payload
+            return{ 
+                ...state, 
+                items: [... state.items, action.payload]
             };
         }
-            
+        
+        case DELETE_TODO:
+            return {
+            //    items: [...state.items.filter( item => item !== action.payload)]
+            items: [...state.items.filter( item => item.id !== action.payload.id)]
+            };
     
         default:
             return state;

@@ -8,10 +8,11 @@ import { addTodo } from "../redux/actions";
 class TodoFormUI extends React.Component{
     constructor(props){
         super(props)
+        console.log(props)
         this.state = {
-            description: props.form.description,
-            category:props.form.category,
-            content:props.form.content
+            description: props.items.description,
+            category:props.items.category,
+            content:props.items.content
         }
     }
 
@@ -31,8 +32,13 @@ class TodoFormUI extends React.Component{
         this.setState ({category:event.target.value})
     }
 
-    addTodo = (e) => {
+    addTodo = () => {
         this.props.addTodo(this.state)
+        this.setState({
+            description:'',
+            category:'',
+            content:''
+        })
     }
     render(){
         return (
@@ -71,9 +77,9 @@ class TodoFormUI extends React.Component{
                                         style = {{border: '0.5px solid'}}
                                         >
                                         <option aria-label="None" value="" />
-                                        <option value={10}>Ten</option>
-                                        <option value={20}>Twenty</option>
-                                        <option value={30}>Thirty</option>
+                                        <option value={'CSS'}>CSS</option>
+                                        <option value={'HTML'}>HTML</option>
+                                        <option value={'JAVA'}>JAVA</option>
                                     </Select>
                                 </Grid>
                             </Grid>

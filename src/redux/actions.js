@@ -1,7 +1,15 @@
-import {ADD_TODO} from './actionType'
+import {ADD_TODO, DELETE_TODO} from './actionType'
 
-// let nextTodoId = 0
+let nextTodoId = 0
 export const addTodo = (content)=>({
     type:ADD_TODO,
-    payload: content
+    payload: {
+        id: ++nextTodoId,
+        content
+    }
+})
+
+export const deleteTodo = (id) => ({
+    type: DELETE_TODO,
+    payload: {id}
 })

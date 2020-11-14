@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {AppBar, Toolbar, ListItem, ListItemText, List, makeStyles } from '@material-ui/core'
+import {Link} from 'react-router-dom'
 
 const navLinks = [
     {title:'TODO', path:'/'},
@@ -31,11 +32,13 @@ const Navbar = () =>{
                 <Toolbar>
                         <List Component='nav' aria-labelledby="main navigation" className={classes.navDisplayFlex}>
                             {navLinks.map(({title, path}) => (
-                                <a href={path} key={title} className={classes.linkText}>
+                                // <a href={path} key={title} className={classes.linkText}>
+                                <Link to={path} key={title}>
                                     <ListItem button>
                                         <ListItemText primary={title} />
                                     </ListItem>
-                                </a>
+                                    </Link>
+                                // </a>
                             ))}
                         </List>
                 </Toolbar>

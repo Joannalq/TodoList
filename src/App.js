@@ -25,7 +25,7 @@ export default function App(){
                         <Route path='/about'>
                             <About />
                         </Route>
-                        <Route path='/item'>
+                        <Route path='/:id'>
                             <ItemPage />
                         </Route>
                     </Switch>

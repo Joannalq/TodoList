@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -20,10 +20,6 @@ import {
 } from "../redux/actions";
 import Item from "./Item";
 
-function createData(description, category, content) {
-  return { description, category, content };
-}
-
 const headCells = [
   {
     id: "description",
@@ -37,7 +33,7 @@ const headCells = [
 
 // table title
 function EnhancedTableHead(props) {
-  const { classes, onSelectAllClick, numSelected, rowCount } = props;
+  const { onSelectAllClick, numSelected, rowCount } = props;
   return (
     <TableHead>
       <TableRow>
@@ -97,6 +93,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Display({ items, checkList, deleteSelectedItems, updateCheckList }) {
   const classes = useStyles();
+  console.log(checkList);
 
   const handleSelectAllClick = (event) => {
     const checked = event.target.checked;

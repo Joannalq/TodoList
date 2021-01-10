@@ -5,13 +5,11 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import { deleteTodo, updateCheckList } from "../redux/actions";
 import { connect } from "react-redux";
-// import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function Item({ item, deleteTodo, updateCheckList, isChecked }) {
   // const [checked, setChecked] = React.useState(false);
   const handleChange = (event) => {
-    // setChecked(event.target.checked);
     updateCheckList([{ id: item.id, checked: !isChecked }]);
   };
 
@@ -41,5 +39,8 @@ const mapStateToProps = (state) => {
   return state.todos;
 };
 
-export default connect(mapStateToProps, { deleteTodo, updateCheckList })(Item);
+export default connect(mapStateToProps, {
+  deleteTodo,
+  updateCheckList,
+})(Item);
 // export default Item

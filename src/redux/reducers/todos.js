@@ -5,7 +5,7 @@ import {
   DELETE_SELECTITEMS,
 } from "../actionType";
 
-const initialState = {
+export const initialState = {
   items: [],
   checkList: [],
 };
@@ -21,6 +21,7 @@ export default function (state = initialState, action) {
 
     case DELETE_TODO:
       return {
+        ...state,
         items: [...state.items.filter((item) => item.id !== action.payload.id)],
       };
 
